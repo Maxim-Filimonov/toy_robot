@@ -23,6 +23,15 @@ describe ToyRobot::ControlPanel do
         panel.run(raw_command)
       end
 
+      it 'does not creates robot from null command' do
+        raw_command = "SOME INIT COMMAND"
+        expect(init_blueprint).to receive(:new).with(raw_command)
+        allow(valid_command).to receive(:valid?).and_return(false)
+
+        panel.run(raw_command)
+        expect(panel.robot).to be_nil
+      end
+
       it 'does not create another robot when one already exists' do
         allow(valid_command).to receive(:execute).and_return(:robot)
         panel.run("PLACE 0,0,NORTH")

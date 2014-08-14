@@ -40,7 +40,9 @@ module ToyRobot
         end
       else
         command = match_command(init_blueprints, raw_command)
-        @robot = command.execute
+        if command.valid?
+          @robot = command.execute
+        end
       end
     end
 

@@ -36,9 +36,10 @@ module ToyRobot
     end
 
     def move_forward
+      movement_system.request_move_forward
       movement_allowed = sensors.all? { |sen| sen.can?(:move) }
       if movement_allowed
-        movement_system.move_forward
+        movement_system.move
       end
     end
 

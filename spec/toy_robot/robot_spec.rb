@@ -53,9 +53,10 @@ describe ToyRobot::Robot do
     describe '#move_forward' do
       context 'when all sensors allow movement' do
         it 'moves the chassis' do
+          expect(movement_system).to receive(:request_move_forward)
           allow(sensor).to receive(:can?).with(:move).and_return(true)
 
-          expect(movement_system).to receive(:move_forward)
+          expect(movement_system).to receive(:move)
 
           placed_robot.move_forward
         end
@@ -63,9 +64,10 @@ describe ToyRobot::Robot do
 
       context 'when one of sensors does not allow movement' do
         it 'stays on the same place' do
+          allow(movement_system).to receive(:request_move_forward)
           allow(sensor).to receive(:can?).with(:move).and_return(false)
 
-          expect(movement_system).to_not receive(:move_forward)
+          expect(movement_system).to_not receive(:move)
           placed_robot.move_forward
         end
       end

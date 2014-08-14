@@ -1,4 +1,5 @@
 require 'toy_robot/utils/compass'
+require 'toy_robot/utils/location'
 
 module ToyRobot
   module Sensors
@@ -7,17 +8,19 @@ module ToyRobot
 
       def attach(robot)
         @robot = robot
-        direction = Utils::Compass.to_direction(robot.brain[:initial][:direction])
-        robot.brain[:current_direction] = direction
       end
 
       def name
         :compass
       end
 
+      def can?(action)
+        true
+      end
+
       def data
         {
-          direction: robot.brain[:current_direction].upcase.to_s
+          direction: robot.brain[:current_location].direction.upcase.to_s
         }
       end
     end

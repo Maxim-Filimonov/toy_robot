@@ -1,26 +1,21 @@
 require 'toy_robot/sensors/compass_sensor'
 
 describe ToyRobot::Sensors::CompassSensor do
-  describe '#attach' do
-    it 'sets current direction' do
-      robot = instance_double('ToyRobot::Robot', brain: {
-        initial: { direction: "NORTH"}
-        })
-
-      subject.attach(robot)
-
-      expect(robot.brain[:current_direction]).to eq(ToyRobot::Utils::Compass.north)
-    end
-  end
 
   describe '#data' do
     it 'returns current direction in upper case format' do
       robot = instance_double('ToyRobot::Robot', brain: {
-        initial: { direction: "NORTH"}
-      })
+        current_location: ToyRobot::Utils::Location.new(x: 0, y: 0, direction: ToyRobot::Utils::Compass.north)}
+      )
       subject.attach(robot)
 
       expect(subject.data[:direction]).to eq("NORTH")
+    end
+  end
+
+  describe '#can?' do
+    it 'allows any move' do
+      expect(subject.can?(:move)).to eq(true)
     end
   end
 end

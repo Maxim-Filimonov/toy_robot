@@ -11,7 +11,7 @@ module ToyRobot
       end
 
       def execute(robot)
-        robot.move_forward()
+        robot.move_forward
       end
     end
   end

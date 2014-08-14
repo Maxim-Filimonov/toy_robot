@@ -11,7 +11,7 @@ module ToyRobot
       end
 
       def execute(robot)
-        robot.rotate_anticlockwise()
+        robot.rotate_anticlockwise
       end
     end
   end

@@ -10,7 +10,7 @@ module ToyRobot
         false
       end
 
-      def execute(args=nil)
+      def execute(_=nil)
         "UNRECOGNIZED COMMAND - #{raw_command}"
       end
     end

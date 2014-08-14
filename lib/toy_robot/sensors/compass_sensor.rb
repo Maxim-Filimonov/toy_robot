@@ -14,7 +14,7 @@ module ToyRobot
         :compass
       end
 
-      def can?(action)
+      def can?(_)
         true
       end
 

@@ -2,7 +2,7 @@ require 'toy_robot/commands/move_command'
 
 describe ToyRobot::Commands::MoveCommand do
   context 'with valid raw command' do
-    subject { described_class.new("MOVE")}
+    subject { described_class.new("MOVE") }
 
     its(:valid?) { is_expected.to eq(true) }
 
@@ -18,7 +18,7 @@ describe ToyRobot::Commands::MoveCommand do
   end
 
   context 'with invalid command' do
-    subject { described_class.new("BOGUS")}
+    subject { described_class.new("BOGUS") }
 
     its(:valid?) { is_expected.to eq(false) }
   end

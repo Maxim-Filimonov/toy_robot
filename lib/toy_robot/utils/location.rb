@@ -2,6 +2,7 @@ module ToyRobot
   module Utils
     class Location
       attr_reader :x, :y, :direction
+
       def initialize(args={})
         @x = args.fetch(:x)
         @y = args.fetch(:y)
@@ -16,8 +17,8 @@ module ToyRobot
 
       def eql?(other)
         x == other.x &&
-        y == other.y &&
-        direction == other.direction
+          y == other.y &&
+          direction == other.direction
       end
 
       def to_s

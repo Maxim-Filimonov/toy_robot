@@ -8,12 +8,13 @@ module ToyRobot
     DEFAULT_MAX_Y = 5
 
     attr_reader :movement_system, :sensors, :brain
+
     def initialize(opts={})
       @sensors = opts.delete(:sensors) || default_sensors
       @movement_system = opts.delete(:movement_system) || default_movement_system
       @brain = {initial: opts}
 
-      sensors.each {|sen| sen.attach(self) }
+      sensors.each { |sen| sen.attach(self) }
       movement_system.attach(self)
     end
 
@@ -26,7 +27,7 @@ module ToyRobot
     end
 
     def self.place(opts={})
-      defaults = { boundary_x: DEFAULT_MAX_X, boundary_y: DEFAULT_MAX_Y }
+      defaults = {boundary_x: DEFAULT_MAX_X, boundary_y: DEFAULT_MAX_Y}
       opts = defaults.merge(opts)
       if pre_flight_checks_passed?(opts)
         self.new(opts)
@@ -51,7 +52,7 @@ module ToyRobot
     end
 
     def report
-      sensors.inject({}) {|sum, sensor|
+      sensors.inject({}) { |sum, sensor|
         sum[sensor.name] = sensor.data
         sum
       }
@@ -64,6 +65,7 @@ module ToyRobot
         movement_system.move
       end
     end
+
     def self.pre_flight_checks_passed?(opts)
       x = opts.fetch(:place_x)
       y = opts.fetch(:place_y)

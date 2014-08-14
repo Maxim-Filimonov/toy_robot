@@ -5,11 +5,12 @@ module ToyRobot
   module Sensors
     class NavSensor
       attr_reader :robot, :frame
+
       def attach(robot)
         @robot = robot
         initial_location = robot.brain[:initial]
         current_location = ToyRobot::Utils::Location.new(x: initial_location[:place_x], y: initial_location[:place_y],
-                                      direction: ToyRobot::Utils::Compass.to_direction(initial_location[:direction]))
+                                                         direction: ToyRobot::Utils::Compass.to_direction(initial_location[:direction]))
         @frame = {
           x: 0..robot.brain[:initial][:boundary_x],
           y: 0..robot.brain[:initial][:boundary_y]

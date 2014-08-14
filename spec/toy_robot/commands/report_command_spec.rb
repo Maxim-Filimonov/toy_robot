@@ -11,14 +11,14 @@ describe ToyRobot::Commands::ReportCommand do
         robot = instance_double('ToyRobot::Robot')
 
         allow(robot).to receive(:report).and_return(
-          nav: {
-            x: 1,
-            y: 2
-          },
-          compass: {
-            direction: "NORTH"
-          }
-        )
+                          nav: {
+                            x: 1,
+                            y: 2
+                          },
+                          compass: {
+                            direction: "NORTH"
+                          }
+                        )
         result = subject.execute(robot)
         expect(result).to eq("1,2,NORTH")
       end

@@ -19,7 +19,7 @@ module ToyRobot
       def result
         if valid?
           {
-            direction: match[:direction], 
+            direction: match[:direction],
             place_x: match[:x].to_i,
             place_y: match[:y].to_i
           }

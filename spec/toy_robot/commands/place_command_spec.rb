@@ -9,9 +9,9 @@ describe ToyRobot::Commands::ParseCommand do
     describe '#result' do
       subject { parse_command.result }
 
-      its([:direction]) { is_expected.to eq('NORTH')}
-      its([:place_x]) { is_expected.to eq(1)}
-      its([:place_y]) { is_expected.to eq(2)}
+      its([:direction]) { is_expected.to eq('NORTH') }
+      its([:place_x]) { is_expected.to eq(1) }
+      its([:place_y]) { is_expected.to eq(2) }
     end
 
     describe '#execute' do

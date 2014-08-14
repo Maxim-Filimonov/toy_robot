@@ -2,6 +2,7 @@ module ToyRobot
   module Commands
     class ReportCommand
       attr_reader :raw_command
+
       def initialize(raw_command)
         @raw_command = raw_command
       end

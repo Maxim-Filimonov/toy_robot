@@ -2,7 +2,7 @@ require 'toy_robot/commands/left_command'
 
 describe ToyRobot::Commands::LeftCommand do
   context 'with valid raw command' do
-    subject { described_class.new("LEFT")}
+    subject { described_class.new("LEFT") }
 
     its(:valid?) { is_expected.to eq(true) }
 
@@ -18,7 +18,7 @@ describe ToyRobot::Commands::LeftCommand do
   end
 
   context 'with invalid command' do
-    subject { described_class.new("BOGUS")}
+    subject { described_class.new("BOGUS") }
 
     its(:valid?) { is_expected.to eq(false) }
   end

@@ -12,7 +12,7 @@ module ToyRobot
     attr_reader :init_blueprints, :action_blueprints, :display
 
     def initialize(init_blueprints: default_init_blueprints,
-      action_blueprints: default_action_blueprints, display: $stdout)
+                   action_blueprints: default_action_blueprints, display: $stdout)
       @init_blueprints = init_blueprints
       @action_blueprints = action_blueprints
       @display = display
@@ -23,12 +23,12 @@ module ToyRobot
     end
 
     def default_action_blueprints
-        [
-          ToyRobot::Commands::MoveCommand,
-          ToyRobot::Commands::ReportCommand,
-          ToyRobot::Commands::LeftCommand,
-          ToyRobot::Commands::RightCommand,
-        ]
+      [
+        ToyRobot::Commands::MoveCommand,
+        ToyRobot::Commands::ReportCommand,
+        ToyRobot::Commands::LeftCommand,
+        ToyRobot::Commands::RightCommand,
+      ]
     end
 
     def run(raw_command)
@@ -48,9 +48,9 @@ module ToyRobot
 
     private
     def match_command(blueprints, raw_command)
-      commands = blueprints.map {|cmd| cmd.new(raw_command) }
-      null_command = -> (){ ToyRobot::Commands::NullCommand.new(raw_command) }
-      commands.detect(null_command) {|cmd| cmd.valid? }
+      commands = blueprints.map { |cmd| cmd.new(raw_command) }
+      null_command = -> () { ToyRobot::Commands::NullCommand.new(raw_command) }
+      commands.detect(null_command) { |cmd| cmd.valid? }
     end
   end
 end

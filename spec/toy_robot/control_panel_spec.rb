@@ -7,9 +7,9 @@ describe ToyRobot::ControlPanel do
     end
 
     describe 'init commands' do
-      subject(:panel) { described_class.new(init_blueprints: [init_blueprint], display: double(:display, puts: true))}
+      subject(:panel) { described_class.new(init_blueprints: [init_blueprint], display: double(:display, puts: true)) }
       let(:init_blueprint) { class_double('ToyRobot::Commands::ParseCommand') }
-      let(:valid_command)  { instance_double('ToyRobot::Commands::ParseCommand', valid?: true) }
+      let(:valid_command) { instance_double('ToyRobot::Commands::ParseCommand', valid?: true) }
 
       before do
         allow(init_blueprint).to receive(:new).and_return(valid_command)
@@ -43,9 +43,9 @@ describe ToyRobot::ControlPanel do
     end
 
     describe 'action commands' do
-      subject(:panel) { described_class.new(action_blueprints: [action_blueprint])}
+      subject(:panel) { described_class.new(action_blueprints: [action_blueprint]) }
       let(:action_blueprint) { class_double('ToyRobot::Commands::MoveCommand') }
-      let(:valid_command)  { instance_double('ToyRobot::Commands::MoveCommand', valid?: true) }
+      let(:valid_command) { instance_double('ToyRobot::Commands::MoveCommand', valid?: true) }
 
       before do
         allow(action_blueprint).to receive(:new).and_return(valid_command)

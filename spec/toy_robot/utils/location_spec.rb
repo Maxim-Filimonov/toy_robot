@@ -3,7 +3,7 @@ require 'toy_robot/utils/location'
 describe ToyRobot::Utils::Location do
   describe '#create' do
     it 'create the same location when no args supplied' do
-      loc = described_class.new(x: 0, y:0, direction: "N")
+      loc = described_class.new(x: 0, y: 0, direction: "N")
 
       new_location = loc.create
 
@@ -11,7 +11,7 @@ describe ToyRobot::Utils::Location do
     end
 
     it 'allows to use arguments to move location' do
-      loc = described_class.new(x: 0, y:0, direction: "N")
+      loc = described_class.new(x: 0, y: 0, direction: "N")
 
       new_location = loc.create(x: 5)
 
@@ -22,7 +22,7 @@ describe ToyRobot::Utils::Location do
 
   describe '#to_s' do
     it 'prints location coordinates and direction' do
-      loc = described_class.new(x: 0, y:0, direction: "N")
+      loc = described_class.new(x: 0, y: 0, direction: "N")
       expect(loc.to_s).to eq("Location 0, 0 facing N")
     end
   end

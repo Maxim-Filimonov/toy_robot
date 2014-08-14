@@ -1,7 +1,7 @@
 require 'toy_robot/commands/null_command'
 
 describe ToyRobot::Commands::NullCommand do
-  subject { described_class.new("BOGUS")}
+  subject { described_class.new("BOGUS") }
 
   it 'is never valid' do
     expect(subject.valid?).to eq(false)

@@ -26,6 +26,12 @@ describe ToyRobot::Robot do
 
       described_class.place(place_x: 1, place_y: 2, direction: "SOUTH", sensors: [sensor])
     end
+
+    it 'fills brain with initial data' do
+      args = { place_x: 1, place_y: 2, direction: "SOUTH" }
+      robot = described_class.place(args)
+      expect(robot.brain[:initial]).to eq(args)
+    end
   end
 
   describe '#move_forward' do

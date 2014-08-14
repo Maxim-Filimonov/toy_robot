@@ -5,7 +5,7 @@ module ToyRobot
     MAX_X = 5
     MAX_Y = 5
 
-    attr_reader :movement_system, :sensors
+    attr_reader :movement_system, :sensors, :brain
     def initialize(opts={})
       @sensors = opts.delete(:sensors) || default_sensors
       @movement_system = opts.delete(:movement_system) || default_movement_system

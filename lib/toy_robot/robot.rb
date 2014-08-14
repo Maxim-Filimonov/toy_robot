@@ -45,6 +45,11 @@ module ToyRobot
       move_if_allowed
     end
 
+    def rotate_clockwise
+      movement_system.request_rotate_clockwise
+      move_if_allowed
+    end
+
     def report
       sensors.inject({}) {|sum, sensor|
         sum[sensor.name] = sensor.data

@@ -3,6 +3,7 @@ require 'toy_robot/commands/parse_command'
 require 'toy_robot/commands/move_command'
 require 'toy_robot/commands/report_command'
 require 'toy_robot/commands/left_command'
+require 'toy_robot/commands/right_command'
 require 'toy_robot/commands/null_command'
 
 module ToyRobot
@@ -26,6 +27,7 @@ module ToyRobot
           ToyRobot::Commands::MoveCommand,
           ToyRobot::Commands::ReportCommand,
           ToyRobot::Commands::LeftCommand,
+          ToyRobot::Commands::RightCommand,
         ]
     end
 

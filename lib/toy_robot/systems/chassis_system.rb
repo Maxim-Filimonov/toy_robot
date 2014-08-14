@@ -15,7 +15,6 @@ module ToyRobot
           location.create(y: location.y - 1)
         else
           raise "Unrecognized #{location.direction}"
-          # type code here
         end
 
         robot.brain[:target_location] = new_location
@@ -32,7 +31,22 @@ module ToyRobot
                          location.create(direction: ToyRobot::Utils::Compass.north)
                        else
                          raise "Unrecognized #{location.direction}"
-                         # type code here
+                       end
+
+        robot.brain[:target_location] = new_location
+      end
+
+      def request_rotate_clockwise
+        location = robot.brain[:current_location]
+        new_location = case location.direction
+                       when ToyRobot::Utils::Compass.north
+                         location.create(direction: ToyRobot::Utils::Compass.east)
+                       # when ToyRobot::Utils::Compass.west
+                       #   location.create(direction: ToyRobot::Utils::Compass.south)
+                       # when ToyRobot::Utils::Compass.east
+                       #   location.create(direction: ToyRobot::Utils::Compass.north)
+                       else
+                         raise "Unrecognized #{location.direction}"
                        end
 
         robot.brain[:target_location] = new_location

@@ -4,6 +4,9 @@ module ToyRobot
       self.new
     end
 
+    def move_forward
+    end      
+
     private
     def initialise
     end

@@ -1,5 +1,7 @@
 require 'toy_robot/robot'
 require 'toy_robot/commands/parse_command'
+require 'toy_robot/commands/move_command'
+require 'toy_robot/commands/null_command'
 
 module ToyRobot
   class ControlPanel
@@ -29,7 +31,8 @@ module ToyRobot
     private
     def match_command(blueprints, raw_command)
       commands = blueprints.map {|cmd| cmd.new(raw_command) }
-      commands.detect {|cmd| cmd.valid? }
+      null_command = -> (){ ToyRobot::Commands::NullCommand.new(raw_command) }
+      commands.detect(null_command) {|cmd| cmd.valid? }
     end
   end
 end

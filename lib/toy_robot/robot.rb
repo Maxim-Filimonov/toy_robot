@@ -1,14 +1,26 @@
+require 'toy_robot/systems/chassis_system'
+
 module ToyRobot
   class Robot
     MAX_X = 5
     MAX_Y = 5
+
+    attr_reader :movement_system, :sensors
     def initialize(opts={})
-      sensors = opts.delete(:sensors) || default_sensors
-      @sensors = sensors.map {|sen| sen.new(opts) }
+      @sensors = opts.delete(:sensors) || default_sensors
+      @movement_system = opts.delete(:movement_system) || default_movement_system
+      @brain = {initial: opts}
+
+      sensors.each {|sen| sen.attach(self) }
+      movement_system.attach(self)
     end
 
     def default_sensors
       []
+    end
+
+    def default_movement_system
+      ToyRobot::Systems::ChassisSystem.new
     end
 
     def self.place(opts={})
@@ -26,6 +38,10 @@ module ToyRobot
     end
 
     def move_forward
+      movement_allowed = sensors.all? { |sen| sen.can?(:move) }
+      if movement_allowed
+        movement_system.move_forward
+      end
     end
 
     def report

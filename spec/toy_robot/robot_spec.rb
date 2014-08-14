@@ -19,12 +19,37 @@ describe ToyRobot::Robot do
       end
     end
 
-    it 'initialises all sensors after landing' do
+    it 'initialises all sensors on landing' do
       sensor = instance_double('ToyRobot::Sensors::NavSensor')
 
-      expect(sensor).to receive(:new).with(place_x: 1, place_y: 2, direction: "SOUTH")
+      expect(sensor).to receive(:attach).with(instance_of(described_class))
 
       described_class.place(place_x: 1, place_y: 2, direction: "SOUTH", sensors: [sensor])
+    end
+  end
+
+  describe '#move_forward' do
+    let(:sensor)  { instance_double('ToyRobot::Sensors::NavSensor', attach: true) }
+    let(:movement_system)  { instance_double('ToyRobot::Systems::ChassisSystem', attach: true) }
+    subject(:placed_robot) { described_class.new(sensors: [sensor],
+      movement_system: movement_system) }
+
+    context 'when all sensors allow movement' do
+      it 'moves the chassis' do
+        allow(sensor).to receive(:can?).with(:move).and_return(true)
+
+        expect(movement_system).to receive(:move_forward)
+
+        placed_robot.move_forward
+      end
+    end
+    context 'when one of sensors does not allow movement' do
+      it 'stays on the same place' do
+        allow(sensor).to receive(:can?).with(:move).and_return(false)
+
+        expect(movement_system).to_not receive(:move_forward)
+        placed_robot.move_forward
+      end
     end
   end
 end

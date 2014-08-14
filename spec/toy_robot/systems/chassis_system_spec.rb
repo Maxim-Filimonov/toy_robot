@@ -5,7 +5,7 @@ describe ToyRobot::Systems::ChassisSystem do
   describe 'movements' do
     let(:system) { described_class.new }
     let(:robot) { instance_double('ToyRobot::Robot', brain: {
-      current_location:  ToyRobot::Utils::Location.new(x: 1, y: 1, direction: direction) }) }
+      current_location: ToyRobot::Utils::Location.new(x: 1, y: 1, direction: initial_direction)}) }
     before do
       system.attach(robot)
     end
@@ -17,27 +17,27 @@ describe ToyRobot::Systems::ChassisSystem do
       end
 
       context 'when moving to north' do
-        let(:direction) { ToyRobot::Utils::Compass.north }
-        its(:x) { is_expected.to eq(1)}
-        its(:y) { is_expected.to eq(2)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.north }
+        its(:x) { is_expected.to eq(1) }
+        its(:y) { is_expected.to eq(2) }
       end
 
       context 'when moving to east' do
-        let(:direction) { ToyRobot::Utils::Compass.east }
-        its(:x) { is_expected.to eq(2)}
-        its(:y) { is_expected.to eq(1)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.east }
+        its(:x) { is_expected.to eq(2) }
+        its(:y) { is_expected.to eq(1) }
       end
 
       context 'when moving to south' do
-        let(:direction) { ToyRobot::Utils::Compass.south }
-        its(:x) { is_expected.to eq(1)}
-        its(:y) { is_expected.to eq(0)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.south }
+        its(:x) { is_expected.to eq(1) }
+        its(:y) { is_expected.to eq(0) }
       end
 
       context 'when moving to west' do
-        let(:direction) { ToyRobot::Utils::Compass.west }
-        its(:x) { is_expected.to eq(0)}
-        its(:y) { is_expected.to eq(1)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.west }
+        its(:x) { is_expected.to eq(0) }
+        its(:y) { is_expected.to eq(1) }
       end
     end
     describe '#request_rotate_anticlockwise' do
@@ -46,23 +46,23 @@ describe ToyRobot::Systems::ChassisSystem do
       end
 
       context 'when rotating from north' do
-        let(:direction) { ToyRobot::Utils::Compass.north }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.west)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.north }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.west) }
       end
 
       context 'when rotating from west' do
-        let(:direction) { ToyRobot::Utils::Compass.west }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.south)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.west }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.south) }
       end
 
       context 'when rotating from east' do
-        let(:direction) { ToyRobot::Utils::Compass.east }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.north)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.east }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.north) }
       end
 
       context 'when rotating from south' do
-        let(:direction) { ToyRobot::Utils::Compass.south }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.east)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.south }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.east) }
       end
     end
 
@@ -72,23 +72,23 @@ describe ToyRobot::Systems::ChassisSystem do
       end
 
       context 'when rotating from north' do
-        let(:direction) { ToyRobot::Utils::Compass.north }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.east)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.north }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.east) }
       end
 
       context 'when rotating from west' do
-        let(:direction) { ToyRobot::Utils::Compass.west }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.north)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.west }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.north) }
       end
 
       context 'when rotating from east' do
-        let(:direction) { ToyRobot::Utils::Compass.east }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.south)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.east }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.south) }
       end
 
       context 'when rotating from south' do
-        let(:direction) { ToyRobot::Utils::Compass.south }
-        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.west)}
+        let(:initial_direction) { ToyRobot::Utils::Compass.south }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.west) }
       end
     end
   end
@@ -97,8 +97,8 @@ describe ToyRobot::Systems::ChassisSystem do
     it 'replaces current location with target location' do
       target_location = ToyRobot::Utils::Location.new(x: 0, y: 1, direction: ToyRobot::Utils::Compass.north)
       robot = instance_double('ToyRobot::Robot', brain: {
-        current_location:  ToyRobot::Utils::Location.new(x: 0, y: 0, direction: ToyRobot::Utils::Compass.north) ,
-        target_location: target_location })
+        current_location: ToyRobot::Utils::Location.new(x: 0, y: 0, direction: ToyRobot::Utils::Compass.north),
+        target_location: target_location})
       subject.attach(robot)
 
       subject.move

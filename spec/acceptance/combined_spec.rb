@@ -15,4 +15,19 @@ describe 'Robot combination of different movements' do
     expect(panel.display.gets).to eq('3,3,NORTH')
   end
 
+  it 'can walk a circle' do
+    panel.run("PLACE 1,2,EAST")
+    panel.run("MOVE")
+    panel.run("RIGHT")
+    panel.run("MOVE")
+    panel.run("RIGHT")
+    panel.run("MOVE")
+    panel.run("RIGHT")
+    panel.run("MOVE")
+    panel.run("RIGHT")
+    panel.run("REPORT")
+
+    expect(panel.display.gets).to eq('1,2,EAST')
+  end
+
 end

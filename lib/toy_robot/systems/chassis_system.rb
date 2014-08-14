@@ -13,6 +13,8 @@ module ToyRobot
           location.create(x: location.x + 1)
         when ToyRobot::Utils::Compass.south
           location.create(y: location.y - 1)
+        when ToyRobot::Utils::Compass.west
+          location.create(x: location.x - 1)
         else
           raise "Unrecognized #{location.direction}"
         end

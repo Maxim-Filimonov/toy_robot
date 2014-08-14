@@ -33,6 +33,12 @@ describe ToyRobot::Systems::ChassisSystem do
         its(:x) { is_expected.to eq(1)}
         its(:y) { is_expected.to eq(0)}
       end
+
+      context 'when moving to west' do
+        let(:direction) { ToyRobot::Utils::Compass.west }
+        its(:x) { is_expected.to eq(0)}
+        its(:y) { is_expected.to eq(1)}
+      end
     end
     describe '#request_rotate_anticlockwise' do
       before do

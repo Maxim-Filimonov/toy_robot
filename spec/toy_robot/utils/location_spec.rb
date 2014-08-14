@@ -19,4 +19,11 @@ describe ToyRobot::Utils::Location do
       expect(new_location.x).to eql(5)
     end
   end
+
+  describe '#to_s' do
+    it 'prints location coordinates and direction' do
+      loc = described_class.new(x: 0, y:0, direction: "N")
+      expect(loc.to_s).to eq("Location 0, 0 facing N")
+    end
+  end
 end

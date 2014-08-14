@@ -20,7 +20,9 @@ module ToyRobot
         direction == other.direction
       end
 
-
+      def to_s
+        "Location #{x}, #{y} facing #{direction}"
+      end
     end
   end
 end

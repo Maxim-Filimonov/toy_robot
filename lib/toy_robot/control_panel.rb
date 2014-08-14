@@ -3,28 +3,33 @@ require 'toy_robot/commands/parse_command'
 
 module ToyRobot
   class ControlPanel
-    attr_reader :robot, :init_blueprints
+    attr_accessor :robot
+    attr_reader :init_blueprints, :action_blueprints
 
-    def initialize(init_blueprints: [ToyRobot::Commands::ParseCommand])
+    def initialize(init_blueprints: [ToyRobot::Commands::ParseCommand],
+      action_blueprints: [ToyRobot::Commands::MoveCommand])
       @init_blueprints = init_blueprints
+      @action_blueprints = action_blueprints
     end
 
-    def run(command)
+    def run(raw_command)
       if robot
-        # Interaction with action command
+        command = match_command(action_blueprints, raw_command)
+        command.execute(robot)
       else
-        @robot = init_robot(command)
+        command = match_command(init_blueprints, raw_command)
+        @robot = command.execute
       end
-    end
-
-    def init_robot(command)
-      init_commands = init_blueprints.map {|cmd| cmd.new(command) }
-      command = init_commands.detect {|cmd| cmd.valid? }
-      command.execute
     end
 
     def display
       '0,1,NORTH'
+    end
+
+    private
+    def match_command(blueprints, raw_command)
+      commands = blueprints.map {|cmd| cmd.new(raw_command) }
+      commands.detect {|cmd| cmd.valid? }
     end
   end
 end

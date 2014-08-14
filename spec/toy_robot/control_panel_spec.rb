@@ -7,7 +7,7 @@ describe ToyRobot::ControlPanel do
     end
 
     describe 'init commands' do
-      subject(:panel) { described_class.new(init_blueprints: [init_blueprint])}
+      subject(:panel) { described_class.new(init_blueprints: [init_blueprint], display: double(:display, puts: true))}
       let(:init_blueprint) { class_double('ToyRobot::Commands::ParseCommand') }
       let(:valid_command)  { instance_double('ToyRobot::Commands::ParseCommand', valid?: true) }
 

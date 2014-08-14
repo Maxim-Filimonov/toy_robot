@@ -1,17 +1,17 @@
 module ToyRobot
   module Commands
-    class NullCommand
+    class LeftCommand
       attr_reader :raw_command
       def initialize(raw_command)
         @raw_command = raw_command
       end
 
       def valid?
-        true
+        raw_command == "LEFT"
       end
 
-      def execute(args=nil)
-        "UNRECOGNIZED COMMAND - #{raw_command}"
+      def execute(robot)
+        robot.rotate_anticlockwise()
       end
     end
   end

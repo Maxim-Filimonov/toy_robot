@@ -7,7 +7,7 @@ describe ToyRobot::Commands::NullCommand do
     subject.valid?
   end
 
-  it 'can be executed' do
-    expect { subject.execute(:robot) }.to_not raise_error
+  it 'returns unrecognized command' do
+    expect(subject.execute).to eq("UNRECOGNIZED COMMAND - BOGUS")
   end
 end

@@ -14,6 +14,16 @@ module ToyRobot
         robot.brain[:target_location] = new_location
       end
 
+      def request_rotate_anticlockwise
+        location = robot.brain[:current_location]
+        new_location = case location.direction
+                       when ToyRobot::Utils::Compass.north
+                         location.create(direction: ToyRobot::Utils::Compass.west)
+                       end
+
+        robot.brain[:target_location] = new_location
+      end
+
       def move
         robot.brain[:current_location] = robot.brain[:target_location]
       end

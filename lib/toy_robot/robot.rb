@@ -37,10 +37,12 @@ module ToyRobot
 
     def move_forward
       movement_system.request_move_forward
-      movement_allowed = sensors.all? { |sen| sen.can?(:move) }
-      if movement_allowed
-        movement_system.move
-      end
+      move_if_allowed
+    end
+
+    def rotate_anticlockwise
+      movement_system.request_rotate_anticlockwise
+      move_if_allowed
     end
 
     def report
@@ -51,6 +53,12 @@ module ToyRobot
     end
 
     private
+    def move_if_allowed
+      movement_allowed = sensors.all? { |sen| sen.can?(:move) }
+      if movement_allowed
+        movement_system.move
+      end
+    end
     def self.pre_flight_checks_passed?(opts)
       x = opts.fetch(:place_x)
       y = opts.fetch(:place_y)

@@ -1,3 +1,4 @@
+$:.push(File.join(__FILE__, "../lib"))
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.filter_run :focus

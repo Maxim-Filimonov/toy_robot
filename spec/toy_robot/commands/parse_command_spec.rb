@@ -1,23 +1,30 @@
 require 'toy_robot/commands/parse_command'
 
 describe ToyRobot::Commands::ParseCommand do
-  subject(:parse_command) { described_class }
+  context 'with valid raw command' do
+    subject(:parse_command) { described_class.new("PLACE 0,0,NORTH") }
 
-  context 'when there are enough arguments' do
-    it "can parse NORTH direction" do
-      command_result = parse_command.parse('PLACE 0,0,NORTH')
-      expect(command_result.parsed[:direction]).to eq("NORTH")
+    its(:valid?) { is_expected.to eq(true) }
+
+    describe '#result' do
+      subject { parse_command.result }
+
+      its([:direction]) { is_expected.to eq('NORTH')}
+      its([:place_x]) { is_expected.to eq(0)}
+      its([:place_y]) { is_expected.to eq(0)}
     end
 
-    it "can parse initial coordinates" do
-      command_result = parse_command.parse('PLACE 0,0,NORTH')
-      expect(command_result.parsed[:place_x]).to eq(0)
-      expect(command_result.parsed[:place_y]).to eq(0)
-    end
+    describe '#execute' do
+      let(:robot_class) { class_double('ToyRobot::Robot') }
 
-    it 'indicates that parsing is valid' do
-      command_result = parse_command.parse('PLACE 0,0,NORTH')
-      expect(command_result).to be_valid
+      it 'initialize a new robot' do
+        expect(robot_class).to receive(:place).with(parse_command.result).and_return(:robot)
+
+        result = parse_command.execute(robot_class: robot_class)
+
+        expect(result).to eq(:robot)
+      end
     end
   end
+
 end

@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.2.5)
+    highline (1.6.21)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -22,5 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  highline
   rspec
   rspec-its

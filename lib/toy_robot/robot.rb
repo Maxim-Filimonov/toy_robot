@@ -2,8 +2,8 @@ require 'toy_robot/systems/chassis_system'
 
 module ToyRobot
   class Robot
-    MAX_X = 5
-    MAX_Y = 5
+    DEFAULT_MAX_X = 5
+    DEFAULT_MAX_Y = 5
 
     attr_reader :movement_system, :sensors, :brain
     def initialize(opts={})
@@ -24,6 +24,8 @@ module ToyRobot
     end
 
     def self.place(opts={})
+      defaults = { max_x: DEFAULT_MAX_X, max_y: DEFAULT_MAX_X }
+      opts = defaults.merge(opts)
       if pre_flight_checks_passed?(opts)
         self.new(opts)
       else
@@ -34,7 +36,7 @@ module ToyRobot
     def self.pre_flight_checks_passed?(opts)
       x = opts.fetch(:place_x)
       y = opts.fetch(:place_y)
-      inside_boundaries = (0..MAX_X).include?(x) && (0..MAX_Y).include?(y)
+      inside_boundaries = (0..opts[:max_x]).include?(x) && (0..opts[:max_y]).include?(y)
     end
 
     def move_forward

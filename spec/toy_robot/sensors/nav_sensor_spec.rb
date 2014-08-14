@@ -83,13 +83,13 @@ describe ToyRobot::Sensors::NavSensor do
     end
   end
 
-  describe '#coordinates_from_south_west' do
+  describe '#data' do
 
     it 'should return distance from south and west as x and y coordinates' do
       sensor.detect_borders five_by_five_boundaries.merge(placement_x: 2, placement_y: 3)
-      x, y = sensor.coordinates_from_south_west
-      expect(x).to eq(2)
-      expect(y).to eq(3)
+      data = sensor.data
+      expect(data[:x]).to eq(2)
+      expect(data[:y]).to eq(3)
     end
   end
 end

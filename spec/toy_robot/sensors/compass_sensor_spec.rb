@@ -12,4 +12,15 @@ describe ToyRobot::Sensors::CompassSensor do
       expect(robot.brain[:current_direction]).to eq(ToyRobot::Utils::Compass.north)
     end
   end
+
+  describe '#data' do
+    it 'returns current direction in upper case format' do
+      robot = instance_double('ToyRobot::Robot', brain: {
+        initial: { direction: "NORTH"}
+      })
+      subject.attach(robot)
+
+      expect(subject.data[:direction]).to eq("NORTH")
+    end
+  end
 end

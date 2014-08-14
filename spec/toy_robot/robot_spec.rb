@@ -45,27 +45,39 @@ describe ToyRobot::Robot do
 
   end
 
-  describe '#move_forward' do
-    let(:sensor)  { instance_double('ToyRobot::Sensors::NavSensor', attach: true) }
-    let(:movement_system)  { instance_double('ToyRobot::Systems::ChassisSystem', attach: true) }
+  context 'after robot is placed' do
+    let(:sensor) { instance_double('ToyRobot::Sensors::NavSensor', attach: true) }
+    let(:movement_system) { instance_double('ToyRobot::Systems::ChassisSystem', attach: true) }
     subject(:placed_robot) { described_class.new(sensors: [sensor],
-      movement_system: movement_system) }
+                                                 movement_system: movement_system) }
+    describe '#move_forward' do
+      context 'when all sensors allow movement' do
+        it 'moves the chassis' do
+          allow(sensor).to receive(:can?).with(:move).and_return(true)
 
-    context 'when all sensors allow movement' do
-      it 'moves the chassis' do
-        allow(sensor).to receive(:can?).with(:move).and_return(true)
+          expect(movement_system).to receive(:move_forward)
 
-        expect(movement_system).to receive(:move_forward)
+          placed_robot.move_forward
+        end
+      end
 
-        placed_robot.move_forward
+      context 'when one of sensors does not allow movement' do
+        it 'stays on the same place' do
+          allow(sensor).to receive(:can?).with(:move).and_return(false)
+
+          expect(movement_system).to_not receive(:move_forward)
+          placed_robot.move_forward
+        end
       end
     end
-    context 'when one of sensors does not allow movement' do
-      it 'stays on the same place' do
-        allow(sensor).to receive(:can?).with(:move).and_return(false)
 
-        expect(movement_system).to_not receive(:move_forward)
-        placed_robot.move_forward
+    describe '#report' do
+      it 'puts data for sensor with name' do
+        allow(sensor).to receive(:name).and_return(:bogus_sensor)
+        allow(sensor).to receive(:data).and_return({foo: :bar})
+
+        report = placed_robot.report
+        expect(report[:bogus_sensor]).to eq(foo: :bar)
       end
     end
   end

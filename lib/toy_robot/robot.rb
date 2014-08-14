@@ -35,12 +35,6 @@ module ToyRobot
       end
     end
 
-    def self.pre_flight_checks_passed?(opts)
-      x = opts.fetch(:place_x)
-      y = opts.fetch(:place_y)
-      inside_boundaries = (0..opts[:boundary_x]).include?(x) && (0..opts[:boundary_y]).include?(y)
-    end
-
     def move_forward
       movement_allowed = sensors.all? { |sen| sen.can?(:move) }
       if movement_allowed
@@ -49,17 +43,19 @@ module ToyRobot
     end
 
     def report
-      {
-        nav: {
-          x: 0,
-          y: 1
-        },
-        compass: {
-          direction: "NORTH"
-        }
+      sensors.inject({}) {|sum, sensor|
+        sum[sensor.name] = sensor.data
+        sum
       }
     end
 
-
+    private
+    def self.pre_flight_checks_passed?(opts)
+      x = opts.fetch(:place_x)
+      y = opts.fetch(:place_y)
+      inside_x_boundary = (0..opts[:boundary_x]).include?(x)
+      inside_y_boundary = (0..opts[:boundary_y]).include?(y)
+      inside_x_boundary && inside_y_boundary
+    end
   end
 end

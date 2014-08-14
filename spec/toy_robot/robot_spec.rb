@@ -31,17 +31,18 @@ describe ToyRobot::Robot do
       args = { place_x: 1, place_y: 2, direction: "SOUTH" }
 
       robot = described_class.place(args)
-      expected = args.merge(max_x: ToyRobot::Robot::DEFAULT_MAX_X,
-      max_y: ToyRobot::Robot::DEFAULT_MAX_Y)
+      expected = args.merge(boundary_x: ToyRobot::Robot::DEFAULT_MAX_X,
+      boundary_y: ToyRobot::Robot::DEFAULT_MAX_Y)
       expect(robot.brain[:initial]).to eq(expected)
     end
 
     it 'allows to override max coordinates' do
-      args = { place_x: 1, place_y: 2, direction: "SOUTH", max_x: 10, max_y: 10 }
+      args = { place_x: 1, place_y: 2, direction: "SOUTH", boundary_x: 10, boundary_y: 12 }
 
       robot = described_class.place(args)
       expect(robot.brain[:initial]).to eq(args)
     end
+
   end
 
   describe '#move_forward' do

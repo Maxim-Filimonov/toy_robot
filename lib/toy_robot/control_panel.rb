@@ -1,6 +1,7 @@
 require 'toy_robot/robot'
 require 'toy_robot/commands/parse_command'
 require 'toy_robot/commands/move_command'
+require 'toy_robot/commands/report_command'
 require 'toy_robot/commands/null_command'
 
 module ToyRobot

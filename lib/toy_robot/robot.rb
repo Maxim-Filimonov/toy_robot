@@ -1,4 +1,6 @@
 require 'toy_robot/systems/chassis_system'
+require 'toy_robot/sensors/nav_sensor'
+require 'toy_robot/sensors/compass_sensor'
 
 module ToyRobot
   class Robot
@@ -16,7 +18,7 @@ module ToyRobot
     end
 
     def default_sensors
-      []
+      [ToyRobot::Sensors::NavSensor.new, ToyRobot::Sensors::CompassSensor.new]
     end
 
     def default_movement_system
@@ -24,7 +26,7 @@ module ToyRobot
     end
 
     def self.place(opts={})
-      defaults = { max_x: DEFAULT_MAX_X, max_y: DEFAULT_MAX_X }
+      defaults = { boundary_x: DEFAULT_MAX_X, boundary_y: DEFAULT_MAX_Y }
       opts = defaults.merge(opts)
       if pre_flight_checks_passed?(opts)
         self.new(opts)
@@ -36,7 +38,7 @@ module ToyRobot
     def self.pre_flight_checks_passed?(opts)
       x = opts.fetch(:place_x)
       y = opts.fetch(:place_y)
-      inside_boundaries = (0..opts[:max_x]).include?(x) && (0..opts[:max_y]).include?(y)
+      inside_boundaries = (0..opts[:boundary_x]).include?(x) && (0..opts[:boundary_y]).include?(y)
     end
 
     def move_forward

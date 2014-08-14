@@ -1,4 +1,4 @@
-require 'toy_robot/commands/parse_command'
+require 'toy_robot/commands/place_command'
 
 describe ToyRobot::Commands::ParseCommand do
   context 'with valid raw command' do

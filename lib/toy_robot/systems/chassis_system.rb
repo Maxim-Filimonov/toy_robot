@@ -9,6 +9,13 @@ module ToyRobot
         new_location = case location.direction
         when ToyRobot::Utils::Compass.north
           location.create(y: location.y + 1)
+        when ToyRobot::Utils::Compass.east
+          location.create(x: location.x + 1)
+        when ToyRobot::Utils::Compass.south
+          location.create(y: location.y - 1)
+        else
+          raise "Unrecognized #{location.direction}"
+          # type code here
         end
 
         robot.brain[:target_location] = new_location
@@ -19,6 +26,13 @@ module ToyRobot
         new_location = case location.direction
                        when ToyRobot::Utils::Compass.north
                          location.create(direction: ToyRobot::Utils::Compass.west)
+                       when ToyRobot::Utils::Compass.west
+                         location.create(direction: ToyRobot::Utils::Compass.south)
+                       when ToyRobot::Utils::Compass.east
+                         location.create(direction: ToyRobot::Utils::Compass.north)
+                       else
+                         raise "Unrecognized #{location.direction}"
+                         # type code here
                        end
 
         robot.brain[:target_location] = new_location

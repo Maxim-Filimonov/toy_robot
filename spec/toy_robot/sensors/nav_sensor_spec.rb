@@ -6,7 +6,7 @@ describe ToyRobot::Sensors::NavSensor do
   let(:five_by_five_boundaries) { {boundary_x: 5, boundary_y: 5} }
 
   describe '#can?(:move)' do
-    ToyRobot::Utils::Compass.cordinal_directions.each do |direction|
+    ToyRobot::Utils::Compass.cardinal_directions.each do |direction|
       it 'allows to go to any direction when not near border' do
         robot.brain[:target_location] = ToyRobot::Utils::Location.new(x: 1, y: 1, direction: direction)
         robot.brain[:initial] = five_by_five_boundaries.merge(place_x: 1, place_y: 1, direction: "NORTH")
@@ -21,7 +21,7 @@ describe ToyRobot::Sensors::NavSensor do
         sensor.attach(robot)
       end
 
-      it 'does not allow to go to direction of a border if near boder' do
+      it 'does not allow to go to direction of a border if near border' do
         robot.brain[:target_location] = ToyRobot::Utils::Location.new(x: 0, y: -1,
                                                                       direction: ToyRobot::Utils::Compass.south)
         expect(sensor.can?(:move)).to eq(false)

@@ -24,38 +24,12 @@ module ToyRobot
 
       def request_rotate_anticlockwise
         location = robot.brain[:current_location]
-        new_location = case location.direction
-                       when ToyRobot::Utils::Compass.north
-                         location.create(direction: ToyRobot::Utils::Compass.west)
-                       when ToyRobot::Utils::Compass.west
-                         location.create(direction: ToyRobot::Utils::Compass.south)
-                       when ToyRobot::Utils::Compass.east
-                         location.create(direction: ToyRobot::Utils::Compass.north)
-                       when ToyRobot::Utils::Compass.south
-                         location.create(direction: ToyRobot::Utils::Compass.east)
-                       else
-                         raise "Unrecognized #{location.direction}"
-                       end
-
-        robot.brain[:target_location] = new_location
+        robot.brain[:target_location] = location.create(direction: ToyRobot::Utils::Compass.left_from(location.direction))
       end
 
       def request_rotate_clockwise
         location = robot.brain[:current_location]
-        new_location = case location.direction
-                       when ToyRobot::Utils::Compass.north
-                         location.create(direction: ToyRobot::Utils::Compass.east)
-                       when ToyRobot::Utils::Compass.west
-                         location.create(direction: ToyRobot::Utils::Compass.north)
-                       when ToyRobot::Utils::Compass.east
-                         location.create(direction: ToyRobot::Utils::Compass.south)
-                       when ToyRobot::Utils::Compass.south
-                         location.create(direction: ToyRobot::Utils::Compass.west)
-                       else
-                         raise "Unrecognized #{location.direction}"
-                       end
-
-        robot.brain[:target_location] = new_location
+        robot.brain[:target_location] = location.create(direction: ToyRobot::Utils::Compass.right_from(location.direction))
       end
 
       def move

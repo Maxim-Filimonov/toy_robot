@@ -29,6 +29,8 @@ module ToyRobot
                          location.create(direction: ToyRobot::Utils::Compass.south)
                        when ToyRobot::Utils::Compass.east
                          location.create(direction: ToyRobot::Utils::Compass.north)
+                       when ToyRobot::Utils::Compass.south
+                         location.create(direction: ToyRobot::Utils::Compass.east)
                        else
                          raise "Unrecognized #{location.direction}"
                        end

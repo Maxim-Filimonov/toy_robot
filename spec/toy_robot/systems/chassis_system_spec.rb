@@ -53,6 +53,11 @@ describe ToyRobot::Systems::ChassisSystem do
         let(:direction) { ToyRobot::Utils::Compass.east }
         its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.north)}
       end
+
+      context 'when rotating from south' do
+        let(:direction) { ToyRobot::Utils::Compass.south }
+        its(:direction) { is_expected.to eq(ToyRobot::Utils::Compass.east)}
+      end
     end
 
     describe '#request_rotate_clockwise' do

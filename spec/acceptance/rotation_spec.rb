@@ -21,7 +21,7 @@ describe 'Robot rotation' do
 
   end
 
-  it 'can rotate 360 degrees' do
+  it 'can rotate 360 degrees to the right' do
     panel.run("PLACE 0,0,NORTH")
     panel.run("RIGHT")
     panel.run("RIGHT")
@@ -30,6 +30,16 @@ describe 'Robot rotation' do
     panel.run("REPORT")
 
     expect(panel.display.gets).to eq('0,0,NORTH')
+  end
 
+  it 'can rotate 360 degrees to the left' do
+    panel.run("PLACE 0,0,NORTH")
+    panel.run("LEFT")
+    panel.run("LEFT")
+    panel.run("LEFT")
+    panel.run("LEFT")
+    panel.run("REPORT")
+
+    expect(panel.display.gets).to eq('0,0,NORTH')
   end
 end

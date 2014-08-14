@@ -4,17 +4,7 @@ require 'toy_robot/utils/location'
 module ToyRobot
   module Sensors
     class NavSensor
-      attr_reader :robot, :distances, :frame
-      def initialize
-        @distances = Hash[*ToyRobot::Utils::Compass.cordinal_directions.map { |d| [d, 0] }.flatten]
-      end
-
-      ToyRobot::Utils::Compass.cordinal_directions.each do |cordinal|
-        define_method "steps_left_to_#{cordinal}_border" do
-          distances[cordinal]
-        end
-      end
-
+      attr_reader :robot, :frame
       def attach(robot)
         @robot = robot
         initial_location = robot.brain[:initial]
@@ -26,11 +16,6 @@ module ToyRobot
         }
 
         robot.brain[:current_location] = current_location
-      end
-
-      def update(direction)
-        distances[direction] -= 1
-        distances[ToyRobot::Utils::Compass.opposite(direction)] += 1
       end
 
       def can?(action)

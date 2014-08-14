@@ -36,10 +36,6 @@ module ToyRobot
         robot.brain[:current_location] = robot.brain[:target_location]
       end
 
-      def face
-
-      end
-
       def attach(robot)
         @robot = robot
       end

@@ -5,7 +5,10 @@ module ToyRobot
     end
 
     def move_forward
-    end      
+    end
+
+    def report
+    end
 
     private
     def initialise

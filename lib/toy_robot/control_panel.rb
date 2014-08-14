@@ -1,17 +1,22 @@
 require 'toy_robot/robot'
+require 'toy_robot/commands/parse_command'
+
 module ToyRobot
   class ControlPanel
-    attr_reader :robot_class
-    attr_reader :robot
+    attr_reader :robot_class, :robot, :init_commands
 
     # PLACE_CMD_REGEX = /PLACE\s\s*(?<x>\d+)\s*,\s*(?<y>\d+)\s*,\s*(?<direction>(NORTH|WEST|EAST|SOUTH))\s*/
-    def initialize(robot_class: ToyRobot::Robot)
+    def initialize(robot_class: ToyRobot::Robot,
+      init_commands: [ToyRobot::Commands::ParseCommand])
       @robot_class = robot_class
+      @init_commands = init_commands
     end
 
     def run(command)
       unless robot
-        @robot = @robot_class.place(place_x: 0, place_y: 0, direction: "N")
+        command = init_commands.detect {|cmd| cmd.parse(command).valid? }
+        result = command.parse(command)
+        @robot = @robot_class.place(result.parsed)
       end
     end
 

@@ -9,7 +9,7 @@ describe ToyRobot::ControlPanel do
 
     context 'placement commands' do
       it 'sends placement command to robot' do
-        expect(robot_class).to receive(:place).with(place_x: 0,place_y: 0,direction: "N")
+        expect(robot_class).to receive(:place).with(place_x: 0,place_y: 0,direction: "NORTH")
 
         panel.run("PLACE 0,0,NORTH")
       end

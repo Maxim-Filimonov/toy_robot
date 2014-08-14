@@ -20,4 +20,16 @@ describe 'Robot rotation' do
     expect(panel.display.gets).to eq('0,0,EAST')
 
   end
+
+  it 'can rotate 360 degrees' do
+    panel.run("PLACE 0,0,NORTH")
+    panel.run("RIGHT")
+    panel.run("RIGHT")
+    panel.run("RIGHT")
+    panel.run("RIGHT")
+    panel.run("REPORT")
+
+    expect(panel.display.gets).to eq('0,0,NORTH')
+
+  end
 end

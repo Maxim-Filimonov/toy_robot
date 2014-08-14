@@ -41,10 +41,12 @@ module ToyRobot
         new_location = case location.direction
                        when ToyRobot::Utils::Compass.north
                          location.create(direction: ToyRobot::Utils::Compass.east)
-                       # when ToyRobot::Utils::Compass.west
-                       #   location.create(direction: ToyRobot::Utils::Compass.south)
-                       # when ToyRobot::Utils::Compass.east
-                       #   location.create(direction: ToyRobot::Utils::Compass.north)
+                       when ToyRobot::Utils::Compass.west
+                         location.create(direction: ToyRobot::Utils::Compass.north)
+                       when ToyRobot::Utils::Compass.east
+                         location.create(direction: ToyRobot::Utils::Compass.south)
+                       when ToyRobot::Utils::Compass.south
+                         location.create(direction: ToyRobot::Utils::Compass.west)
                        else
                          raise "Unrecognized #{location.direction}"
                        end

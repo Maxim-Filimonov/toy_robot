@@ -14,4 +14,5 @@ describe 'Robot combination of different movements' do
 
     expect(panel.display.gets).to eq('3,3,NORTH')
   end
+
 end

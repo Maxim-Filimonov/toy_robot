@@ -18,6 +18,14 @@ chmod +x ./run.rb
 ./run.rb
 ```
 
+## Assumptions
+
+- **Only one robot can be placed on the table**. As it is impossible to control more than one robot only one robot
+can be placed the table. Thinking ahead it might be required to either be able to switch between robots or to reset the state and remove the current robot
+- **Ignorance is bliss**. Robot just ignores command it can't perform.
+Would be more user friendly to reply something meaningful like "Cannot perform the move due to hazardous conditions" but that's where I would speak to the real user and figure out the actual usage.
+Trying to avoid Windows "Are you sure???"
+
 ## Code problem details
 -----------
 
@@ -107,11 +115,5 @@ MOVE
 REPORT
 
 Output: 3,3,NORTH
-
-Deliverables:
-
-The Ruby source files, the test data and any test code.
-
-It is not required to provide any graphical output showing the movement of the toy robot. 
 
 -------

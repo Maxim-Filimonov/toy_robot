@@ -2,7 +2,7 @@ require 'toy_robot/commands/parse_command'
 
 describe ToyRobot::Commands::ParseCommand do
   context 'with valid raw command' do
-    subject(:parse_command) { described_class.new("PLACE 0,0,NORTH") }
+    subject(:parse_command) { described_class.new("PLACE 1,2,NORTH") }
 
     its(:valid?) { is_expected.to eq(true) }
 
@@ -10,8 +10,8 @@ describe ToyRobot::Commands::ParseCommand do
       subject { parse_command.result }
 
       its([:direction]) { is_expected.to eq('NORTH')}
-      its([:place_x]) { is_expected.to eq(0)}
-      its([:place_y]) { is_expected.to eq(0)}
+      its([:place_x]) { is_expected.to eq(1)}
+      its([:place_y]) { is_expected.to eq(2)}
     end
 
     describe '#execute' do

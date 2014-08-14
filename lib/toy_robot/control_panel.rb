@@ -5,7 +5,6 @@ module ToyRobot
   class ControlPanel
     attr_reader :robot, :init_commands
 
-    # PLACE_CMD_REGEX = /PLACE\s\s*(?<x>\d+)\s*,\s*(?<y>\d+)\s*,\s*(?<direction>(NORTH|WEST|EAST|SOUTH))\s*/
     def initialize(init_commands: [ToyRobot::Commands::ParseCommand])
       @init_commands = init_commands
     end

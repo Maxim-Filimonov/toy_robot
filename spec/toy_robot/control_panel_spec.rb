@@ -3,9 +3,6 @@ require 'toy_robot/control_panel'
 describe ToyRobot::ControlPanel do
 
   describe '#run' do
-    context 'invalid command' do
-    end
-
     describe 'init commands' do
       subject(:panel) { described_class.new(init_blueprints: [init_blueprint], display: double(:display, puts: true)) }
       let(:init_blueprint) { class_double('ToyRobot::Commands::ParseCommand') }

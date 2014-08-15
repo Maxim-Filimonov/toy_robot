@@ -1,0 +1,15 @@
+example_a:
+  - PLACE 0,0,NORTH
+  - MOVE
+  - REPORT
+example_b:
+  - PLACE 0,0,NORTH
+  - LEFT
+  - REPORT
+example_c:
+  - PLACE 1,2,EAST
+  - MOVE
+  - MOVE
+  - LEFT
+  - MOVE
+  - REPORT

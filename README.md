@@ -26,6 +26,42 @@ can be placed the table. Thinking ahead it might be required to either be able t
 Would be more user friendly to reply something meaningful like "Cannot perform the move due to hazardous conditions" but that's where I would speak to the real user and figure out the actual usage.
 Trying to avoid Windows "Are you sure???"
 
+
+## Design
+
+### Separation of contexts
+I have found two separate contexts within the system. First is interacting with a user and responding to commands.
+Second is moving the Robot around the table.
+
+To minimise coupling between them a context only interact with a single element(root) from another context.
+
+For example, ControlPanel only interacts with Robot not with any subsystems or sensors of the Robot.
+
+### Robot systems isolation
+The Robot understand various set of commands that's a contants and the Robot class needs to be changed to understand more commands.
+However, I wanted to make sure that the Robot class changes will be minimised whenever we need to change the way existing command work.
+
+Because of that Robot doesn't not actually perform any commands itself and delegates this task to subsystems.
+
+Robot uses the movement subsystem to determine location where it wants to go and then uses sensors to determine is it possible to go that location.
+Same happens with rotation but as there are currently no constraints against rotation all of them allowed.
+
+### Brain
+To make it easier to communicate between subsystems and sensors they are using robot brain for communication.
+When a subsystem or a sensor attach to robot they initialise themselves and write to brain any required information.
+
+For example, that is how `PLACE` commands works. 
+On initialisation NavSensor uses initial data array to set current location of the robot and remembers the frame(as set as constant in the exercise).
+CompassSensor determines current direction the same wa.y
+
+### Sensor data
+Each sensor maintains it's data in the robot brain. That is the way sensor and subsystem communicate with each other.
+
+This data can be extracted from sensor by calling `sensor.data`.
+Whenever, user runs a `REPORT` command the Robot just asks all sensors for its data and returns it.
+
+
+
 ## Code problem details
 -----------
 

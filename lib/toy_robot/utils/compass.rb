@@ -24,12 +24,6 @@ module ToyRobot
           CARDINAL_DIRECTIONS[3]
         end
 
-        def opposite(direction)
-          index = CARDINAL_DIRECTIONS.index(direction)
-          index += 2
-          direction_by_index(index)
-        end
-
         def left_from(direction)
           index = CARDINAL_DIRECTIONS.index(direction)
           index -= 1

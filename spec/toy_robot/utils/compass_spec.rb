@@ -2,15 +2,6 @@ require 'toy_robot/utils/compass'
 
 describe ToyRobot::Utils::Compass do
 
-  describe '#opposite' do
-    [[:north, :south], [:west, :east], [:south, :north], [:east, :west]].each do |test_data|
-      it 'indicates correct opposite direction' do
-        opposite = described_class.opposite test_data[0]
-        expect(opposite).to eq(test_data[1])
-      end
-    end
-  end
-
   describe '#left_from' do
     [[:north, :west], [:west, :south], [:south, :east], [:east, :north]].each do |test_data|
       it 'returns next anticlockwise direction' do

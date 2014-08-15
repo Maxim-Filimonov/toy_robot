@@ -12,32 +12,40 @@ describe ToyRobot::Systems::ChassisSystem do
 
     subject { robot.brain[:target_location] }
     describe '#request_move_forward' do
-      before do
-        system.request_move_forward
+      context 'when moving in unknown location' do
+        let(:initial_direction) { "BOGUS" }
+        it 'raises error' do
+          expect { system.request_move_forward }.to raise_error
+        end
       end
+      context 'when direction is valid' do
+        before do
+          system.request_move_forward
+        end
 
-      context 'when moving to north' do
-        let(:initial_direction) { ToyRobot::Utils::Compass.north }
-        its(:x) { is_expected.to eq(1) }
-        its(:y) { is_expected.to eq(2) }
-      end
+        context 'when moving to north' do
+          let(:initial_direction) { ToyRobot::Utils::Compass.north }
+          its(:x) { is_expected.to eq(1) }
+          its(:y) { is_expected.to eq(2) }
+        end
 
-      context 'when moving to east' do
-        let(:initial_direction) { ToyRobot::Utils::Compass.east }
-        its(:x) { is_expected.to eq(2) }
-        its(:y) { is_expected.to eq(1) }
-      end
+        context 'when moving to east' do
+          let(:initial_direction) { ToyRobot::Utils::Compass.east }
+          its(:x) { is_expected.to eq(2) }
+          its(:y) { is_expected.to eq(1) }
+        end
 
-      context 'when moving to south' do
-        let(:initial_direction) { ToyRobot::Utils::Compass.south }
-        its(:x) { is_expected.to eq(1) }
-        its(:y) { is_expected.to eq(0) }
-      end
+        context 'when moving to south' do
+          let(:initial_direction) { ToyRobot::Utils::Compass.south }
+          its(:x) { is_expected.to eq(1) }
+          its(:y) { is_expected.to eq(0) }
+        end
 
-      context 'when moving to west' do
-        let(:initial_direction) { ToyRobot::Utils::Compass.west }
-        its(:x) { is_expected.to eq(0) }
-        its(:y) { is_expected.to eq(1) }
+        context 'when moving to west' do
+          let(:initial_direction) { ToyRobot::Utils::Compass.west }
+          its(:x) { is_expected.to eq(0) }
+          its(:y) { is_expected.to eq(1) }
+        end
       end
     end
     describe '#request_rotate_anticlockwise' do

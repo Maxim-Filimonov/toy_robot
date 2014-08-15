@@ -1,6 +1,11 @@
 require 'toy_robot/commands/place_command'
 
 describe ToyRobot::Commands::ParseCommand do
+  context 'with invalid raw command' do
+    subject(:parse_command) { described_class.new("BOGUS") }
+    its(:valid?) { is_expected.to eq(false) }
+    its(:result) { is_expected.to eq({}) }
+  end
   context 'with valid raw command' do
     subject(:parse_command) { described_class.new("PLACE 1,2,NORTH") }
 
